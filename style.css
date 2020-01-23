@@ -1,0 +1,86 @@
+body{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background-color: #e1ebfa;
+  height: 100vh;
+}
+
+h1, p {
+  font-family: Lato;
+  font-size: 12px;
+}
+
+#list-container{
+  position:relative;
+  width: 350px;
+  height: 300px;
+  padding: 25px;
+  background-color: #f5f5f5;
+  border-radius:4px;
+  margin: 25px 0;
+  text-align:center;
+  overflow: auto;
+}
+
+.item-container{
+  display: flex;
+  width: 350px;
+  height: 80px;
+  background-color:#fff;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+.item-body {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  width: 200px;
+}
+
+.sort-by-wrapper {
+  width: 346px;
+  height: 28px;
+  position: relative;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  padding: 4px 12px;
+  right: 0px;  
+}
+
+.sort-by-btn {
+  border-radius: 6px;
+  background-color: #28a8e0;  
+  color:#fff;
+  height:28px;
+}
+
+.close-btn {
+  color:#A9A9A9;  
+  font-size: 12px;  
+  position: absolute;
+}
+
+.sub-text {
+  color: #787C7E;
+  font-size: 12px;
+}
+
+.userid-font {
+  font-size: 12.5px;
+  font-weight: 550;
+}
+
+.date-time {
+  color: #616770;
+  font-size: 11px;
+}
