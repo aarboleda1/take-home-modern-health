@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import './style.css';
-import List from './components/list';
+import MessageList from './components/messageList';
 
-class App extends Component {
-  render() {
-    return <List />;
-  }
+function App () {
+  return <MessageList />;
 }
-
 
 render(<App />, document.getElementById('root'));

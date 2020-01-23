@@ -1,30 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import data from '../data.json';
+import useInfiniteScroll from '../hooks';
 
-const useInfiniteScroll = (fetchMore, hasMore) => {
-  const [isFetching, setIsFetching] = useState(false);
-  useEffect(() => {  
-    const list = document.getElementById('list-container');
-    list.addEventListener('scroll', (e) => {
-      const el = e.target;
-      if(el.scrollTop + el.clientHeight >= el.scrollHeight && hasMore) {
-        setIsFetching(true);
-      }
-    });  
-  }, []);
-
-  useEffect(() => {
-    if (!isFetching) {
-      return;
-    }
-    fetchMore();
-  }, [isFetching]);
-
-  return [isFetching, setIsFetching];
-};
-
-function List() {
+function MessageList() {
   const deletedMessages = {};
   const [sortByDesc, setSortBy] = useState(true);
   const [hasMore, setHasMore] = useState(true);
@@ -48,7 +27,7 @@ function List() {
     }, 1000);
   }
 
-  const handleDelete = keyToDelete => {
+  function handleDelete(keyToDelete) {
     const filtered = rawMessages.filter(msg => {
       if (keyFromMessage(msg) !== keyToDelete) {
         return msg;
@@ -117,4 +96,4 @@ function keyFromMessage(message) {
   return message.uuid + message.content + message.sentAt
 }
 
-export default List;
+export default MessageList;
