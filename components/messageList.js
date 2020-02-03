@@ -8,15 +8,16 @@ import useInfiniteScroll from '../hooks';
 
 const UP_ARROW = '\u2193';
 const DOWN_ARROW = '\u2191';
+const TIMEOUT_MS = 1000;
 
 /** 
  * An Infinite Scrolling Message List
  */
-function MessageList() {
+function MessageList({pageSize}) {
   const deletedMessages = {};
   const [sortByDesc, setSortBy] = useState(true);
   const [hasMore, setHasMore] = useState(true);
-  const [rawMessages, setMessages] = useState(data.messages.slice(0,5));
+  const [rawMessages, setMessages] = useState(data.messages.slice(0, pageSize));
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreMessages, hasMore);
   
   function fetchMoreMessages() {
@@ -25,7 +26,7 @@ function MessageList() {
     }
     setTimeout(() => {
       setMessages(prevState => {
-        const newMessages =  [...prevState, ...data.messages.slice(prevState.length, prevState.length+5)];
+        const newMessages =  [...prevState, ...data.messages.slice(prevState.length, prevState.length + pageSize)];
         if (newMessages.length >= data.messages.length) {
           setHasMore(false);
         }
@@ -33,7 +34,7 @@ function MessageList() {
       });
 
       setIsFetching(false);
-    }, 1000);
+    }, TIMEOUT_MS);
   }
 
   function handleDelete(keyToDelete) {
