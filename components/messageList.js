@@ -81,6 +81,7 @@ function MessageList() {
       </div>
         {messagesDisplay}
         {isFetching && hasMore && <p>...loading</p>}
+        {!hasMore && <p>No more messages to display!</p>}
     </div>
   );
 }
