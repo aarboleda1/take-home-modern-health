@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import MessageListItem from './messageListItem';
+
 import data from '../data.json';
+import keyFromMessage from '../utils';
+import moment from 'moment';
 import useInfiniteScroll from '../hooks';
 
+const UP_ARROW = '\u2193';
+const DOWN_ARROW = '\u2191';
+
+/** 
+ * An Infinite Scrolling Message List
+ */
 function MessageList() {
   const deletedMessages = {};
   const [sortByDesc, setSortBy] = useState(true);
@@ -53,28 +62,12 @@ function MessageList() {
     } 
     return Date.parse(second.sentAt) - Date.parse(first.sentAt);
   }).map((msg, idx) => {
-    const sentAt = moment(msg.sentAt).format(
-      "dddd, MMMM Do YYYY, h:mm a"
-    ).toString();
     return (
-      <div className="item-container" key={idx}>
-        <div className="item-body">
-          <div>
-            <span className="sub-text">
-              Sent by
-            </span> {" "} 
-            <span className="userid-font">
-            {msg.uuid}
-            </span>
-          </div>
-          <span>{msg.content}</span>
-          <span className="sub-text">{sentAt}</span>
-        </div>
-        <button className="close-btn btn" 
-          onClick={() => handleDelete(keyFromMessage(msg))}
-        > x
-        </button>
-      </div>
+      <MessageListItem 
+        handleDelete={handleDelete} 
+        key={idx}
+        msg={msg} 
+      />
     );
   });
 
@@ -83,17 +76,13 @@ function MessageList() {
       <div className="sort-by-wrapper">
         <button className="sort-by-btn btn" 
           onClick={() => setSortBy(!sortByDesc)}>
-          Sort by Date
+          Sort by Date {sortByDesc ? UP_ARROW : DOWN_ARROW}
         </button>
       </div>
         {messagesDisplay}
         {isFetching && hasMore && <p>...loading</p>}
     </div>
   );
-}
-
-function keyFromMessage(message) {
-  return message.uuid + message.content + message.sentAt
 }
 
 export default MessageList;

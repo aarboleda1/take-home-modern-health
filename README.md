@@ -15,3 +15,4 @@ human-readable string such as "DayOfTheWeek Month Day, Year at Time".
 - Session storage in the browser to know exactly where in the the chat list the user was last viewing. 
 - UI enhancements such as having a more defined color pallete and theme throughout the application
 - Display the username rather than the senderUuid
+- Make the List a re-usable infinite scroll list component 
